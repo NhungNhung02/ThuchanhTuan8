@@ -1,57 +1,53 @@
-import React from 'react'
+import React from 'react';
 
-export default function RecipeListRow({ data }) {
+const RecipeList2x2 = () => {
+    // Mock data cho recipes
+    const recipes = [
+        { id: 1, title: "Pizza Margherita", image: "https://via.placeholder.com/300", time: "30 mins" },
+        { id: 2, title: "Spaghetti Carbonara", image: "https://via.placeholder.com/300", time: "25 mins" },
+        { id: 3, title: "Caesar Salad", image: "https://via.placeholder.com/300", time: "15 mins" },
+        { id: 4, title: "Grilled Chicken", image: "https://via.placeholder.com/300", time: "40 mins" }
+    ];
+
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto'>
-            {data.map((item) => (
-                <div
-                    key={item.id}
-                    className="flex items-center border-gray-200 border rounded-2xl overflow-hidden"
-                >
-                    {/* Image with hover zoom effect */}
-                    <div className="">
+        <div className="recipe-list-2x2">
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '20px',
+                padding: '20px'
+            }}>
+                {recipes.map(recipe => (
+                    <div key={recipe.id} style={{
+                        border: '1px solid #ddd',
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}>
                         <img
-                            src={item.image}
-                            alt={item.name}
-                            className="rounded-b-4xl"
+                            src={recipe.image}
+                            alt={recipe.title}
+                            style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                         />
-                    </div>
-
-                    <div className="p-4 relative">
-                        {/* Recipe name with smooth transition */}
-                        <h3 className="text-start text-xl font-semibold text-gray-800 mb-1 w-10/12 group-hover:text-pink-600 transition-colors duration-300">
-                            {item.title}
-                        </h3>
-
-                        {/* Time badge with hover effect */}
-                        <p className="text-gray-600 text-start text-xs">
-                            {item.time} minutes
-                        </p>
-
-                        {/* Save icon with hover animation */}
-                        <img
-                            className="absolute right-2 top-2 w-8 h-8  group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 cursor-pointer"
-                            src="src/img/saveIcon.png"
-                            alt="Save recipe"
-                        />
-
-                        <div className="flex items-center text-center mb-4">
-                            <img src={item.ava} alt=""
-                                className='w-8 h-8 mt-2' />
-
-                            <div
-                                className='text-gray-600 pt-2 pl-2 font-semibold'
-                            >
-                                {item.author}
-                            </div>
-                        </div>
-
-                        <div className='text-start text-gray-700'>
-                            {item.description}
+                        <div style={{ padding: '15px' }}>
+                            <h3>{recipe.title}</h3>
+                            <p>⏱️ {recipe.time}</p>
+                            <button style={{
+                                backgroundColor: '#ff6b35',
+                                color: 'white',
+                                border: 'none',
+                                padding: '8px 16px',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                            }}>
+                                View Recipe
+                            </button>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
-    )
-}
+    );
+};
+
+export default RecipeList2x2;
